@@ -1,36 +1,36 @@
-// Grabs Playwright's built-in test runner, nicknames it base
+// fixtures/TestData.page.ts
+
 import { test as base } from '@playwright/test';
 
-// Makes your custom test available to all test files
-// Creates YOUR custom test — ready to add fixtures later
+// Custom test export
 export const test = base.extend({});
 
-// const is a JavaScript keyword used to create a variable
-// whose value should not be reassigned later.
+// Base URL
+export const baseURL =
+  'https://automationexercise.com';
 
-// Store this URL in a variable called baseURL
-// and do not change it later
-export const baseURL = 'https://automationexercise.com';
+// Dynamic unique email
+const uniqueEmail =
+  `newuser${Date.now()}@example.com`;
 
-// A fixed account that already exists in the website
-// Used for login tests only — no extra fields needed
-// Email & password never change between runs
+// Existing valid user
 export const validUser = {
   name: 'Naga Deekshitha',
-  email: 'nagadeekshitha123@example.com',
+  email: 'nagadeekshitha@gmail.com',
   password: 'Deekshitha1a@A',
 };
 
+// New user data
 export const newUser = {
   name: 'Naga Deekshitha',
 
-  // Dynamic unique email generated every run
-  email: `newuser${Date.now()}@example.com`,
+  email: uniqueEmail,
 
   password: 'Deekshitha1a@A',
+
   firstName: 'Naga Deekshitha',
   lastName: 'Sareddu',
-  company: 'yelsesoft',
+  company: 'Yelsesoft',
   address: '41218 canton ct',
   address2: '',
   country: 'United States',
@@ -40,29 +40,40 @@ export const newUser = {
   mobileNumber: '9018109444',
 };
 
+// Product data
 export const products = {
-
-  // typed into the search bar
   searchedProduct: 'blue',
-
-  // top navigation category
   category: 'Women',
-
-  // dropdown sub-category
   subCategory: 'Dress',
 };
 
-// 4111111111111111 is a universally accepted
-// fake Visa card number for testing only
-
+// Payment data
 export const payment = {
   cardName: 'Test Card',
-
-  // Standard fake Visa test card
   cardNumber: '4111111111111111',
-
   cvc: '123',
   expiryMonth: '12',
   expiryYear: '2025',
 };
-export const TestData = { baseURL, validUser, newUser, products, payment };
+
+// Final object export
+export const TestData = {
+  baseURL,
+  validUser,
+  newUser,
+  products,
+  payment,
+};
+export const TestData = {
+
+    baseURL: 'https://automationexercise.com',
+
+    contactData: {
+        name: 'Naga Deekshitha',
+        email: 'deekshitha@test.com',
+        subject: 'Playwright Testing',
+        message: 'This is a test message using Playwright.'
+    },
+
+    uploadFilePath: 'test-data/sample.txt'
+};
