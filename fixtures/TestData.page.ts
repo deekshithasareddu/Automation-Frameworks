@@ -63,10 +63,6 @@ export const TestData = {
   newUser,
   products,
   payment,
-};
-export const TestData = {
-
-    baseURL: 'https://automationexercise.com',
 
     contactData: {
         name: 'Naga Deekshitha',
