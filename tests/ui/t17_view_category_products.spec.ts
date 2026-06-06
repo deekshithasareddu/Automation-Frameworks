@@ -2,7 +2,6 @@ import {test, expect} from '@playwright/test';
 
 test('View category products', async ({page})=>{
 
-
     //step 1 & 2 
     await page.goto('https://automationexercise.com');
 
@@ -16,7 +15,7 @@ test('View category products', async ({page})=>{
     await expect(page.getByText('Category')).toBeVisible();
 
     //step 6
-    await page.getByRole('link', {name: 'Women'}).click();
+    await page.locator('a[href="#Women"]').click();
 
     //step 7
     await page.getByRole('link',{name: 'Dress'}).click();
