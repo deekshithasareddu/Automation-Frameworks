@@ -1,0 +1,95 @@
+import { test, expect } from '@playwright/test';
+
+test('Place Order: Login before Checkout', async ({ page }) => {
+
+  // Step 1 & 2
+await page.goto('https://automationexercise.com');
+
+  // Step 3
+await expect(page).toHaveTitle(/Automation Exercise/);
+
+  // Step 4
+await page.getByRole('link', { name: 'Signup / Login' }).click();
+
+  // Step 5
+await page.locator('input[data-qa="login-email"]').fill('your_email@gmail.com');
+await page.locator('input[data-qa="login-password"]').fill('your_password');
+await page.locator('button[data-qa="login-button"]').click();
+
+  // Step 6
+await expect(
+    page.locator('a:has-text("Logged in as")')
+  ).toBeVisible();
+
+  // Step 7 - Add Product
+await page.getByRole('link', { name: 'Products' }).click();
+
+await page.locator('.product-image-wrapper').first().hover();
+
+await page.locator('.add-to-cart').first().click({ force: true });
+
+await page.locator('button.close-modal').click();
+
+  // Step 8
+await page.getByRole('link', { name: 'Cart' }).click();
+
+  // Step 9
+await expect(page).toHaveURL(/view_cart/);
+
+await expect(
+    page.locator('#cart_info_table')
+  ).toBeVisible();
+
+  // Step 10
+await page.locator('.check_out').click();
+
+  // Step 11
+await expect(
+    page.locator('#address_delivery')
+  ).toBeVisible();
+
+await expect(
+    page.locator('#cart_info')
+  ).toBeVisible();
+
+  // Step 12
+await page.locator('textarea[name="message"]')
+    .fill('Please deliver my order quickly.');
+
+await page.getByRole('link', { name: 'Place Order' }).click();
+
+  // Step 13
+await page.locator('input[data-qa="name-on-card"]')
+    .fill('Naga Deekshitha');
+
+await page.locator('input[data-qa="card-number"]')
+    .fill('4111111111111111');
+
+await page.locator('input[data-qa="cvc"]')
+    .fill('123');
+
+await page.locator('input[data-qa="expiry-month"]')
+    .fill('12');
+
+await page.locator('input[data-qa="expiry-year"]')
+    .fill('2030');
+
+  // Step 14
+await page.locator('button[data-qa="pay-button"]').click();
+
+  // Step 15
+await expect(page.locator('p'))
+    .toContainText(
+      'Congratulations! Your order has been confirmed!'
+    );
+
+  // Step 16
+await page.getByRole('link', { name: 'Delete Account' }).click();
+
+  // Step 17
+await expect(
+    page.locator('h2[data-qa="account-deleted"]')
+  ).toContainText('ACCOUNT DELETED!');
+
+await page.locator('a[data-qa="continue-button"]').click();
+});
